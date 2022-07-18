@@ -17,11 +17,8 @@ const title = (props:any) => {
 export default title
 
 
-
-
-
 export const getServerSideProps: GetServerSideProps = async (context) => {
-
+//collecting the title using params
 const {params}:any = context;
 const title = params.title;
     
