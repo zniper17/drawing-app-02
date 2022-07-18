@@ -2,14 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { MongoClient ,ServerApiVersion } from "mongodb";
 import dynamic from 'next/dynamic'
 import { GetServerSideProps } from 'next';
-
 const DocId = (props:any) => {
     const Editor = dynamic(() => import('../../components/Editor'), { ssr: false })
     const [drawingsList,setDrawingList] = useState(JSON.parse(props.requiredDocument))
     const requiredDocument=drawingsList[0]
-   
-    
-
+     
   return (
   <Editor  data = {requiredDocument.documentDetails.document}  title={requiredDocument.documentDetails.title} exist={true}  mongoId={requiredDocument._id} isReadOnly={true} />  
 
@@ -17,9 +14,6 @@ const DocId = (props:any) => {
 }
 
 export default DocId
-
-
-
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const {params} :any = context;
     const id = params.docId;

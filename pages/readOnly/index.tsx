@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-
+import Head from 'next/head';
 import { MongoClient ,ServerApiVersion } from "mongodb";
 import Link from 'next/link';
 import { Nav } from '../../components/Nav';
 import { TDDocument } from '@tldraw/tldraw';
 import { GetServerSideProps } from 'next';
+import {getAllDocuments} from "../api/documents/documents";
 interface IDocument {
     title:string;
     document:TDDocument
@@ -22,26 +23,32 @@ const Read = (props:any) => {
 
    
 return (
-    <section>
-        <Nav />
-     <div className='max-w-6xl mx-auto my-auto mt-20 py-10'>
-       <div>
-       <h1 className='text-3xl py-10 text-softRed uppercase'>You can read your Slates from here</h1>
-       </div>
-       <div className="w-1/3 bg-softBlue rounded-lg shadow">
-       <ul className="divide-y-2 divide-gray-100">
-     {
-        drawingsList.map((drawing) => {
-            return (
-                <li key={drawing._id} className="text-center py-5 tracking-widest" ><Link href={`./readOnly/${drawing._id}`}>{drawing.documentDetails.title}</Link></li>
-            )
-        })
-     }
- </ul>
-     </div>
+  <section>
+  <Head>
+     <title>A Free Drawing Platform</title>
+     <meta name="description" content="Created by Shaham" />
+     <link rel="icon" href="/favicon.ico" />
+   </Head>
+  <Nav />
+ <div className='max-w-6xl mx-auto my-auto mt-10 py-10'>
+   
+   <div className="flex justify-left flex-col space-y-5 ">
+     <h1  className='text-3xl'>Read Your Files here</h1>
+  
+   <ul className='flex flex-col ' >
+  {
+     drawingsList.map((drawing) => {
+         return (
+             <li  key={drawing._id}  className='px-6 py-2 text-2xl text-softBlue hover:text-softRed  rounded-t-lg' ><Link href={`./readOnly/${drawing._id}`}   >{drawing.documentDetails.title}</Link></li>
+         )
+     })
+  }
 
-    </div>
-    </section>
+</ul>
+  </div>
+
+ </div>
+ </section>
   )
 }
 
@@ -51,15 +58,9 @@ export default Read
 
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-    const url =`mongodb+srv://${process.env.mongodb_username}:${process.env.mongodb_password}@cluster0.ytrfw.mongodb.net/tlDraw?retryWrites=true&w=majority`
-    const client = new MongoClient(url, {  serverApi: ServerApiVersion.v1 });
-    const db = client.db();
-    var allDocuments = await db.collection('drawings').find().toArray();
+  var allDocuments = await getAllDocuments()
      var sendDocuments = await JSON.stringify(allDocuments)
-    
-    client.close()
-
-    return {props:{sendDocuments}}
+           return {props:{sendDocuments}}
 
     
 }

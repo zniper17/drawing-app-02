@@ -61,3 +61,15 @@ async function handler(req:any,res:any){
 }
 
 export default handler
+
+
+export async function getAllDocuments(){
+
+    const url =`mongodb+srv://${process.env.mongodb_username}:${process.env.mongodb_password}@cluster0.ytrfw.mongodb.net/tlDraw?retryWrites=true&w=majority`
+    const client = new MongoClient(url, {  serverApi: ServerApiVersion.v1 });
+    const db = client.db();
+    var allDocuments = await db.collection('drawings').find().toArray()
+client.close();
+return allDocuments
+
+}
