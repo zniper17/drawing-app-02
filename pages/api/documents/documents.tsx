@@ -18,7 +18,7 @@ async function handler(req:any,res:any){
         await  db.collection('drawings').insertOne({documentDetails:documentToSend})
        
         client.close();
-        res.status(201).json({message:'Signed Up!'})
+        res.status(201).json({message:'Document all'})
     }
 
     if(req.method == 'GET'){
@@ -64,7 +64,6 @@ export default handler
 
 
 export async function getAllDocuments(){
-
     const url =`mongodb+srv://${process.env.mongodb_username}:${process.env.mongodb_password}@cluster0.ytrfw.mongodb.net/tlDraw?retryWrites=true&w=majority`
     const client = new MongoClient(url, {  serverApi: ServerApiVersion.v1 });
     const db = client.db();

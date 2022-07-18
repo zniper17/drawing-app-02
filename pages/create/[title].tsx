@@ -1,16 +1,8 @@
-import {
-    ColorStyle,
-    DashStyle,
-    SizeStyle,
-    Tldraw,
-    TDDocument,
-    TDShapeType,
-    TldrawApp
-  } from "@tldraw/tldraw";
   import dynamic from 'next/dynamic'
   import { GetServerSideProps } from "next";
 
 const title = (props:any) => {
+  //calling the editor dynamically pushing the title with it
     const Editor = dynamic(() => import('../../components/Editor'), { ssr: false })
   var title = props.title
      return (

@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 
 export default function App(props:any) {
   const rTLDrawApp = React.useRef<TldrawApp>();
+  //Collecting all the props 
 const title = props.title
   const document = props.data;
   const mongoId = props.mongoId;
@@ -20,12 +21,12 @@ const title = props.title
  
   }, []);
  function handleClick(){
-    var newDocument =  rTLDrawApp.current?.document;
 
-  
- 
-     
+  //The new document contains all the information top to bottom  required.
+    var newDocument =  rTLDrawApp.current?.document;
+      
     var reqBody ={}
+    //update
     if(exist){
        
          reqBody = {
@@ -41,7 +42,7 @@ const title = props.title
             }
         }).then((response) => response.json()).then((data) => console.log(data))
     }
-
+//new document
    else{
      reqBody ={
         title:title,
@@ -59,7 +60,7 @@ const title = props.title
  }
 router.replace('/success')
 }
-  
+     /*  all the props are passed on the Tldraw, document props contain all the work meaning the shapes and, for readOnly files the read only is kept true   */
 
   return (
     <div
@@ -73,9 +74,7 @@ router.replace('/success')
       >
         <div>
    { isReadOnly==false && <button onClick={handleClick} className = "bg-softRed ml-5 rounded-md px-4  ">Save your document</button>}
-
-
-       
+    
       <Tldraw  onMount={handleMount} id={id} autofocus  disableAssets showPages={false}  document={firstDocument} readOnly={isReadOnly} showMenu={false} />
       </div>
     </div>

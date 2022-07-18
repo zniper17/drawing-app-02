@@ -5,7 +5,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Nav } from '../../components/Nav';
 
 const Index = () => {
-     const [formStatus,setFormStatus] = useState<boolean>(false);
+
      const titleRef= useRef<HTMLInputElement>(null);
      const [title,setTitle] = useState<any>("")
      const router = useRouter()
@@ -14,16 +14,18 @@ const Index = () => {
   var givenTitle  = titleRef.current?.value
  
     setTitle( givenTitle  );
-    // setFormStatus(true);
+//pushing the router to the given title
      router.push(`create/${givenTitle}`)
 }
     
 
- if(!formStatus){
-    return(
+ 
+      return(
+        //Form to get the title
      <section>
      <Nav />
      <div>
+      
         <div className='flex justify-center items-center h-screen bg-blue-50'>
       
         <div className="w-full max-w-xs">
@@ -44,8 +46,7 @@ const Index = () => {
    </section>
     )
    
- }
-
+ 
 
 }
 

@@ -15,15 +15,14 @@ const DocId = (props:any) => {
 
 export default DocId
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  //Sorting the required the document depending upon the docID  
     const {params} :any = context;
     const id = params.docId;
     const uri = "mongodb+srv://shaham:NIf3noT9YYooT1xV@cluster0.ytrfw.mongodb.net/tlDraw?retryWrites=true&w=majority";
     const client = new MongoClient(uri, {  serverApi: ServerApiVersion.v1 });
     const db = client.db();
     var documentDetails = await db.collection('drawings').find().toArray()
-    
-    
-      var requiredDocument:any = documentDetails.filter((document) => {
+             var requiredDocument:any = documentDetails.filter((document) => {
               if(document._id ==id){
                 return document
               }

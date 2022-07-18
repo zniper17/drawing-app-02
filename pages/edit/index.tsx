@@ -7,6 +7,7 @@ import { GetServerSideProps } from 'next';
 import {getAllDocuments} from "../api/documents/documents";
 const Edit = (props:any) => {
 
+  // The types, TDDocument is given from TL-draw itself 
   interface IDocument {
     title:string;
     document:TDDocument
@@ -18,8 +19,7 @@ const Edit = (props:any) => {
     documentDetails:IDocument
   }
 const [drawingsList,setDrawingList] = useState<IMongoDocument[]>(JSON.parse(props.sendDocuments))
-   
-  return (
+     return (
    <section>
      <Head>
         <title>A Free Drawing Platform</title>
@@ -51,9 +51,9 @@ const [drawingsList,setDrawingList] = useState<IMongoDocument[]>(JSON.parse(prop
 
 export default Edit
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  var allDocuments = await getAllDocuments()
+  //Collecting all the documents
+    var allDocuments = await getAllDocuments()
      var sendDocuments = await JSON.stringify(allDocuments)
     return {props:{sendDocuments}}
-
-    
+   
 }
