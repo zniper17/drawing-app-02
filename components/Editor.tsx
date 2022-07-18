@@ -28,8 +28,7 @@ const title = props.title
     var reqBody ={}
     //update
     if(exist){
-       
-         reqBody = {
+                reqBody = {
             mongoId:mongoId,
           title:title,
           newDocument:newDocument
