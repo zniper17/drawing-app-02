@@ -53,6 +53,7 @@ async function handler(req:any,res:any){
        },function(error,result) {
         console.log(result);
         
+        
        })
         client.close();
         res.status(202).json({message:'Updated'})
@@ -71,5 +72,6 @@ export async function getAllDocuments(){
     var allDocuments = await db.collection('drawings').find().toArray()
 client.close();
 return allDocuments
+
 
 }
