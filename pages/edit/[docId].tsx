@@ -20,7 +20,7 @@ export default DocId
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
 
-//Sorting the required the document depending upon the docID  
+
     const {params}:any = context;
     const id = params.docId;
     const uri = "mongodb+srv://shaham:NIf3noT9YYooT1xV@cluster0.ytrfw.mongodb.net/tlDraw?retryWrites=true&w=majority";
